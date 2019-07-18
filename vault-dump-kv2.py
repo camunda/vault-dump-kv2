@@ -20,7 +20,7 @@ def print_secret(path, mountpoint):
       value = value.encode("utf-8")
     except AttributeError:
       value = value
-    print (" {0}={1}".format(key, repr(value)), end='')
+    print (" {0}=\"{1}\"".format(key, value.replace('"', '\\"')), end='')
   print ()
 
 def recurse_secrets(path_prefix, mountpoint):
