@@ -16,10 +16,10 @@ def print_secret(path, mountpoint):
   print ("vault kv put {}{}".format(vault_dump_mountpoint, path), end='')
   for key in sorted(content.keys()):
     value = content[key]
-    try:
-      value = value.encode("utf-8")
-    except AttributeError:
-      value = value
+    # try:
+    #   value = value.encode("utf-8")
+    # except AttributeError:
+    #   value = value
     print (" {0}=\"{1}\"".format(key, value.replace('"', '\\"')), end='')
   print ()
 

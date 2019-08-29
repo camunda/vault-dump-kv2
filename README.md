@@ -17,7 +17,7 @@ You need to have the `vault` CLI tool and `pip` installed.
 ```sh
 vault login # with auth method of your choice
 
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
 export PYTHONIOENCODING="utf-8"
 export VAULT_DUMP_MOUNTPOINT="/mysecrets/"
