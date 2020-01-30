@@ -1,0 +1,29 @@
+name: ci
+
+on:
+  push:
+  schedule:
+  - cron: '7 4 * * 4'  # weekly on thursday morning
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pipenv
+        pipenv install --dev --deploy
+    - name: Formatting
+      run: |
+        # check that the source files are formatted correctly
+        pipenv run yapf -q *.py
+    - name: Linting
+      run: |
+        pipenv run mypy *.py
+        pipenv run pylint *.py
