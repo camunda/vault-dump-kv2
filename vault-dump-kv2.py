@@ -26,6 +26,7 @@ def print_secret(path, mountpoint):
 
 
 def recurse_secrets(path_prefix, mountpoint):
+    sys.stderr.write("Recursing into path prefix \"{0}\"\n".format(path_prefix))
     keys = client.secrets.kv.v2.list_secrets(path_prefix, mount_point=mountpoint)['data']['keys']
     for key in keys:
         item_path = path_prefix + key
