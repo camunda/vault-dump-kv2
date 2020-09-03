@@ -12,12 +12,12 @@ In addition to the environment variables like `VAULT_ADDR` that the [hvac Python
 
 # Setup
 
-You need to have the `vault` CLI tool and `pip` installed.
+You need to have the `vault` CLI tool and [pipenv](https://pipenv.pypa.io/) installed.
 
 ```sh
 vault login # with auth method of your choice
 
-pip3 install -r requirements.txt
+pipenv install # reads dependencies from Pipfile
 
 export PYTHONIOENCODING="utf-8"
 export VAULT_DUMP_MOUNTPOINT="/mysecrets/"
