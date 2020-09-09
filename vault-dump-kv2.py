@@ -37,6 +37,7 @@ def recurse_secrets(path_prefix, mountpoint):
 
 
 vault_dump_mountpoint = os.environ.get('VAULT_DUMP_MOUNTPOINT', '/secret/')
+vault_dump_path_prefix = os.environ.get('VAULT_DUMP_PATH_PREFIX', '')
 
 print('#')
 print('# vault-dump-kv2.py backup')
@@ -48,4 +49,4 @@ print('#')
 print('# WARNING: not guaranteed to be consistent!')
 print('#')
 
-recurse_secrets('', vault_dump_mountpoint)
+recurse_secrets(vault_dump_path_prefix, vault_dump_mountpoint)

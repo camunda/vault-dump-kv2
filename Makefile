@@ -19,7 +19,7 @@ lint: ## Lint all source code
 	pipenv run mypy *.py
 
 .PHONY: e2e
-e2e: e2e-backup-default ## Run E2E tests against running Vault instance in dev mode
+e2e: e2e-backup-default e2e-backup-path-prefix ## Run E2E tests against running Vault instance in dev mode
 
 .PHONY: e2e-backup-default
 e2e-backup-default: ## Run E2E test for using script with default parameters
@@ -44,6 +44,33 @@ e2e-backup-default: ## Run E2E test for using script with default parameters
 	cleanup
 	sh backup-default.sh
 	[ $$(vault kv get -field hello secret/test1) == "world" ]
+	[ $$(vault kv get -field hello secret/nested/test2) == "world" ]
+
+
+.PHONY: e2e-backup-path-prefix
+e2e-backup-path-prefix: ## Run E2E test for using script with VAULT_DUMP_PATH_PREFIX
+	function cleanup {
+		vault secrets disable secret
+		vault secrets enable -path=secret kv-v2
+	}
+	trap cleanup EXIT
+
+	# prepare environment
+	export VAULT_ADDR='http://127.0.0.1:8200'
+	export VAULT_DUMP_PATH_PREFIX='nested/'
+	vault status
+	vault login $$VAULT_DEV_ROOT_TOKEN_ID
+
+	# create backup, first drop all contents and then insert seed data
+	cleanup
+	vault kv put secret/test1 hello=world
+	vault kv put secret/nested/test2 hello=world
+	pipenv run python3 vault-dump-kv2.py > backup-path-prefix.sh
+
+	# restore backup, cleanup first and then check that only data below nested is present
+	cleanup
+	sh backup-path-prefix.sh
+	vault kv get secret/test1 && exit 1
 	[ $$(vault kv get -field hello secret/nested/test2) == "world" ]
 
 .PHONY: help

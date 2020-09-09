@@ -9,6 +9,7 @@ In addition to the environment variables like `VAULT_ADDR` that the [hvac Python
 
 - `PYTHONIOENCODING` is used to ensure your keys are exported in valid encoding, make sure to use the same during import/export
 - `VAULT_DUMP_MOUNTPOINT` optionally passed as [`mount_point` argument](https://hvac.readthedocs.io/en/stable/usage/secrets_engines/kv_v2.html) to the hvac Python client
+- `VAULT_DUMP_PATH_PREFIX` optionally can be used to only dump a sub path (e.g. `"my/nested/path/"`) of the KV version 2 secrets engine
 
 ## Setup
 
