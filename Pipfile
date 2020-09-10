@@ -5,10 +5,10 @@ url = 'https://pypi.python.org/simple'
 python_version = '3.8'
 
 [packages]
-hvac = '*'
+hvac = '~= 0.10.0'
 
 [dev-packages]
-rope = '*'
-pylint = '*'
-yapf = '*'
-mypy = '*'
+mypy = '== 0.782'
+pylint = '~= 2.6'
+rope = '~= 0.17'
+yapf = '~= 0.30'
