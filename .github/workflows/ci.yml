@@ -31,8 +31,8 @@ jobs:
     strategy:
       matrix:
         vault-version:
-        - 1.6.0
-        - 1.5.5
+        - 1.6.2
+        - 1.5.7
         - 1.4.7
     env:
       VAULT_ADDR: http://127.0.0.1:8200
