@@ -1,5 +1,7 @@
 # vault-dump-kv2
 
+[![ci](https://github.com/camunda/vault-dump-kv2/actions/workflows/ci.yml/badge.svg)](https://github.com/camunda/vault-dump-kv2/actions/workflows/ci.yml)
+
 Dump your [Hashicorp Vault](https://www.vaultproject.io/) KV version 2 secrets engine contents to a file.
 Inspired by [vault-backup](https://github.com/shaneramey/vault-backup) but updated to work with KV version 2 only. Not guaranteed to be consistent.
 
