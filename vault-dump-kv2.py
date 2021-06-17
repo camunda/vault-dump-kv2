@@ -15,13 +15,17 @@ def print_secret(path, mountpoint):
     content = client.secrets.kv.v2.read_secret_version(path, mount_point=mountpoint)['data']['data']
 
     print("vault kv put {}{}".format(vault_dump_mountpoint, path), end='')
-    for key in sorted(content.keys()):
-        value = content[key]
-        # try:
-        #   value = value.encode("utf-8")
-        # except AttributeError:
-        #   value = value
-        print(" {0}=\"{1}\"".format(key, value.replace('"', '\\"')), end='')
+    if content:
+        for key in sorted(content.keys()):
+            value = content[key]
+            # try:
+            #   value = value.encode("utf-8")
+            # except AttributeError:
+            #   value = value
+            print(" {0}=\"{1}\"".format(key, value.replace('"', '\\"')), end='')
+    else:
+        # print a "" to indicate to Vault CLI that we'd like to put an empty secret
+        print(" \"\"")
     print()
 
 

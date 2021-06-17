@@ -67,6 +67,7 @@ jobs:
       run: |
         make e2e
     - name: Persist backup scripts as artifacts
+      if: always()
       uses: actions/upload-artifact@v2
       with:
         name: e2e-vault-${{ matrix.vault-version }}-backup-scripts

@@ -38,6 +38,7 @@ e2e-backup-default: ## Run E2E test for using script with default parameters
 	cleanup
 	vault kv put secret/test1 hello=world
 	vault kv put secret/nested/test2 hello=world
+	vault kv put secret/test3 ""
 	pipenv run python3 vault-dump-kv2.py > backup-default.sh
 
 	# restore backup, again drop all contents first and then check restored data
@@ -45,7 +46,7 @@ e2e-backup-default: ## Run E2E test for using script with default parameters
 	sh backup-default.sh
 	[ $$(vault kv get -field hello secret/test1) == "world" ]
 	[ $$(vault kv get -field hello secret/nested/test2) == "world" ]
-
+	[ $$(vault kv get -format json secret/test3 | jq -r .data.data) == "{}" ]
 
 .PHONY: e2e-backup-path-prefix
 e2e-backup-path-prefix: ## Run E2E test for using script with VAULT_DUMP_PATH_PREFIX
