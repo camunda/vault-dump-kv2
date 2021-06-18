@@ -14,9 +14,9 @@ all: lint e2e ## Run lint and test (default goal)
 
 .PHONY: lint
 lint: ## Lint all source code
-	pipenv run yapf -q *.py
-	pipenv run pylint *.py
-	pipenv run mypy *.py
+	poetry run yapf -q *.py
+	poetry run pylint *.py
+	poetry run mypy *.py
 
 .PHONY: e2e
 e2e: e2e-backup-default e2e-backup-path-prefix ## Run E2E tests against running Vault instance in dev mode
@@ -39,7 +39,7 @@ e2e-backup-default: ## Run E2E test for using script with default parameters
 	vault kv put secret/test1 hello=world
 	vault kv put secret/nested/test2 hello=world
 	vault kv put secret/test3 ""
-	pipenv run python3 vault-dump-kv2.py > backup-default.sh
+	poetry run python3 vault-dump-kv2.py > backup-default.sh
 
 	# restore backup, again drop all contents first and then check restored data
 	cleanup
@@ -66,7 +66,7 @@ e2e-backup-path-prefix: ## Run E2E test for using script with VAULT_DUMP_PATH_PR
 	cleanup
 	vault kv put secret/test1 hello=world
 	vault kv put secret/nested/test2 hello=world
-	pipenv run python3 vault-dump-kv2.py > backup-path-prefix.sh
+	poetry run python3 vault-dump-kv2.py > backup-path-prefix.sh
 
 	# restore backup, cleanup first and then check that only data below nested is present
 	cleanup

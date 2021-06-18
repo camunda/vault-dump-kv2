@@ -1,0 +1,36 @@
+[build-system]
+requires = ["poetry>=1.0"]
+build-backend = "poetry.masonry.api"
+
+[tool.poetry]
+name = "vault-dump-kv2"
+version = "1.0.0"
+description = "Dump your Hashicorp Vault KV version 2 secrets engine contents to a file."
+authors = ["Christian Nicolai"]
+license = "MIT"
+homepage = "https://github.com/camunda/vault-dump-kv2"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+hvac = '~0.10.0'
+
+[tool.poetry.dev-dependencies]
+mypy = "0.902"
+pylint = "~2.8"
+rope = "~0.19"
+yapf = "~0.31"
+
+[tool.yapf]
+based_on_style = "pep8"
+column_limit = 120
+
+[tool.pylint.FORMAT]
+max-line-length = 121
+
+[tool.pylint.MESSAGES_CONTROL]
+disable = "invalid-name,missing-module-docstring,missing-function-docstring"
+
+[tool.mypy]
+ignore_missing_imports = true
+follow_imports = "silent"
+show_column_numbers = true
