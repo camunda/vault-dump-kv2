@@ -25,7 +25,7 @@ def print_secret(path, mountpoint):
             print(" {0}=\"{1}\"".format(key, value.replace('"', '\\"')), end='')
     else:
         # print a "" to indicate to Vault CLI that we'd like to put an empty secret
-        print(" \"\"")
+        print(" \"\"", end='')
     print()
 
 
