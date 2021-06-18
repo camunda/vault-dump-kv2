@@ -1,5 +1,0 @@
-[FORMAT]
-max-line-length=121
-
-[MESSAGES CONTROL]
-disable=invalid-name,missing-module-docstring,missing-function-docstring
