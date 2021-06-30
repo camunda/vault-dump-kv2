@@ -11,7 +11,17 @@ import hvac
 client = hvac.Client()
 
 
+def is_secret_latest_version_deleted(path, mountpoint):
+    metadata = client.secrets.kv.v2.read_secret_metadata(path, mount_point=mountpoint)['data']
+    deletion_time = metadata['versions'][str(metadata['current_version'])]['deletion_time']
+    return deletion_time != ''
+
+
 def print_secret(path, mountpoint):
+    # ignore secrets that are marked as deleted (but not destroyed), don't bother backing up old versions
+    if is_secret_latest_version_deleted(path, mountpoint):
+        return
+
     content = client.secrets.kv.v2.read_secret_version(path, mount_point=mountpoint)['data']['data']
 
     print("vault kv put {}{}".format(vault_dump_mountpoint, path), end='')
