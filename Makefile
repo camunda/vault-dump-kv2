@@ -39,6 +39,11 @@ e2e-backup-default: ## Run E2E test for using script with default parameters
 	vault kv put secret/test1 hello=world
 	vault kv put secret/nested/test2 hello=world
 	vault kv put secret/test3 ""
+	vault kv put secret/deleted-test4 hello=world
+	vault kv delete secret/deleted-test4
+	vault kv put secret/deleted-test5 hello=world
+	vault kv put secret/deleted-test5 hello=stranger
+	vault kv delete secret/deleted-test5
 	poetry run python3 vault-dump-kv2.py > backup-default.sh
 
 	# restore backup, again drop all contents first and then check restored data
@@ -47,6 +52,7 @@ e2e-backup-default: ## Run E2E test for using script with default parameters
 	[ $$(vault kv get -field hello secret/test1) == "world" ]
 	[ $$(vault kv get -field hello secret/nested/test2) == "world" ]
 	[ $$(vault kv get -format json secret/test3 | jq -r .data.data) == "{}" ]
+	[ $$(vault kv list secret/ | grep -c "deleted-test") == "0" ]
 
 .PHONY: e2e-backup-path-prefix
 e2e-backup-path-prefix: ## Run E2E test for using script with VAULT_DUMP_PATH_PREFIX
