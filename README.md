@@ -5,6 +5,8 @@
 Dump your [Hashicorp Vault](https://www.vaultproject.io/) KV version 2 secrets engine contents to a file.
 Inspired by [vault-backup](https://github.com/shaneramey/vault-backup) but updated to work with KV version 2 only. Not guaranteed to be consistent.
 
+*Note*: if you are looking for a more mature tool, go for https://github.com/jonasvinther/medusa!
+
 ## Environment Variables
 
 In addition to the environment variables like `VAULT_ADDR` that the [hvac Python client for Hashicorp Vault](https://python-hvac.org/) implicitly uses, the following are used by this script:
