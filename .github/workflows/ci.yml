@@ -30,10 +30,10 @@ jobs:
     strategy:
       matrix:
         vault-version:
-        - 1.7.2
-        - 1.6.5
-        - 1.5.9
-        - 1.4.7
+        - 1.9.3
+        - 1.8.8
+        - 1.7.9
+        - 1.6.7
     env:
       VAULT_ADDR: http://127.0.0.1:8200
       VAULT_DEV_ROOT_TOKEN_ID: test
