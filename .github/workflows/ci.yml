@@ -3,6 +3,9 @@ name: ci
 
 on:
   push:
+    branches: [master]
+  pull_request:
+    branches: [master]
   schedule:
   - cron: '7 4 * * 4'  # weekly on thursday morning
 
