@@ -10,11 +10,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
       with:
-        python-version: 3.8
+        python-version: '3.10'
     - name: Install dependencies
       run: |
         pip install poetry
@@ -30,10 +30,9 @@ jobs:
     strategy:
       matrix:
         vault-version:
-        - 1.9.3
-        - 1.8.8
-        - 1.7.9
-        - 1.6.7
+        - 1.10.2
+        - 1.9.6
+        - 1.8.11
     env:
       VAULT_ADDR: http://127.0.0.1:8200
       VAULT_DEV_ROOT_TOKEN_ID: test
@@ -45,11 +44,11 @@ jobs:
         ports:
         - 8200:8200
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
       with:
-        python-version: 3.8
+        python-version: '3.10'
     - name: Set up Vault ${{ matrix.vault-version }} client
       run: |
         mkdir -p /home/runner/vault-download
