@@ -5,7 +5,7 @@
 Dump your [Hashicorp Vault](https://www.vaultproject.io/) KV version 2 secrets engine contents to a file.
 Inspired by [vault-backup](https://github.com/shaneramey/vault-backup) but updated to work with KV version 2 only. Not guaranteed to be consistent.
 
-*Note*: if you are looking for a more mature tool, go for https://github.com/jonasvinther/medusa!
+*Note*: if you are looking for a more mature tool, go for https://github.com/jonasvinther/medusa! Or have a look at https://github.com/kir4h/rvault :)
 
 ## Environment Variables
 
